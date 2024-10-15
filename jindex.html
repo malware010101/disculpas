@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dedicatoria</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Times New Roman', serif;
+            padding: 0 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .container {
+            text-align: center;
+            max-width: 600px;
+        }
+        .top-text {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .song-message {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        button {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #e67e22;
+        }
+        .arrow {
+            font-size: 2em;
+            color: gray;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        .arrow:hover {
+            color: white;
+        }
+        .left-arrow {
+            left: 10px;
+        }
+        .right-arrow {
+            right: 10px;
+        }
+        @media (max-width: 768px) {
+            body {
+                font-size: 1em;
+            }
+            .top-text {
+                font-size: 1em;
+            }
+            .song-message {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="section1" class="top-text">
+            Hola corazón, discúlpame🥺...
+        </div>
+        <div id="section2" class="top-text hidden">
+            Discúlpame si el fin de semana te hice pasar y pensar cosas que no estuvieron bien
+        </div>
+        <div id="section3" class="top-text hidden">
+            Estoy muy feliz de estar contigo enserio❤️
+        </div>
+        <div id="section4" class="top-text hidden">
+            y quiero decirte que complementas en un buen momento mi vida❣️
+        </div>
+        <div id="section5" class="song-message hidden">
+            Sabes cuanto valor tiene esta canción, recuerdala siempre porque sera nuestra
+        </div>   
+        <div id="finalSection" class="song-message hidden">
+            Esta canción es para ti❣️
+            <audio id="audio" preload="auto" controls style="display:none;">
+                <source src="I_want_give_up.mp3" type="audio/mp3">
+               
+            </audio>
+            <button onclick="document.getElementById('audio').play()">Play</button>
+        </div>
+    </div>
+    <div class="arrow left-arrow" onclick="previousSection()">&lt;</div>
+    <div class="arrow right-arrow" onclick="nextSection()">&gt;</div>
+
+    <script>
+        let currentSection = 1;
+        const totalSections = 6; // Incluye la sección final con el botón de Play
+
+        function showSection(sectionNumber) {
+            for (let i = 1; i <= totalSections; i++) {
+                document.getElementById(`section${i}`) ? document.getElementById(`section${i}`).classList.add('hidden') : null;
+            }
+            if (sectionNumber <= totalSections - 1) {
+                document.getElementById(`section${sectionNumber}`).classList.remove('hidden');
+            } else {
+                document.getElementById('finalSection').classList.remove('hidden');
+            }
+            updateArrows(sectionNumber);
+        }
+
+        function updateArrows(sectionNumber) {
+            document.querySelector('.left-arrow').style.display = sectionNumber > 1 ? 'block' : 'none';
+            document.querySelector('.right-arrow').style.display = sectionNumber < totalSections ? 'block' : 'none';
+        }
+
+        function nextSection() {
+            if (currentSection < totalSections) {
+                currentSection++;
+                showSection(currentSection);
+            }
+        }
+
+        function previousSection() {
+            if (currentSection > 1) {
+                currentSection--;
+                showSection(currentSection);
+            }
+        }
+
+        // Inicialización
+        showSection(currentSection);
+    </script>
+</body>
+</html>
